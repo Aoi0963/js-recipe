@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h2>問題！</h2>
+    <div id="title">私が所属している音楽サークルは？</div>
+    <button id="suisougaku">吹奏楽</button>
+    <button id="akapera">アカペラ</button>
+    <button id="gassyou">合唱</button>
+    <div id="display"></div>
+
+    <script>
+      const display = document.getElementById("display")
+      const suisougaku = document.getElementById("suisougaku")
+      const akapera = document.getElementById("akapera")
+      const gassyou = document.getElementById("gassyou")
+      suisougaku.onclick = function() {
+        display.textContent = "不正解"
+      }
+      akapera.onclick = function() {
+        display.textContent = "正解"
+      }
+      gassyou.onclick = function() {
+        display.textContent = "不正解"
+      }
+    </script>
+  </body>
+</html>
