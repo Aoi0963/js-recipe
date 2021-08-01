@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ATM</title>
+  </head>
+  <body>
+    <section id="app1">
+      <h3>入力画面</h3>
+
+      <div>
+        <input type="number" v-model="nyuryokugaku" />
+        <div>入力額：{{nyuryokugaku}}円</div>
+        <button v-on:click="nyukin">入金</button>
+        <button　v-on:click="syukkin" v-bind:disabled="zandaka===0">出金</button>
+      </div>
+
+      <h3>口座残高</h3>
+      <div>
+        <div>残高：{{zandaka}}円</div>
+      </div>
+
+      <h3>取引記録</h3>
+      <!--v-forの説明→https://jp.vuejs.org/v2/guide/list.html-->
+      <div v-for="log in logs">{{log}}</div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script>
+      new Vue({
+        el: "#app1",
+        data: {
+          nyuryokugaku: "",
+          zandaka: 0,
+          logs:[],
+        },
+
+        methods: {
+            /*入金押したら*/
+          nyukin: function() {
+              /*残高に入力額足してね*/
+            this.zandaka += Number(this.nyuryokugaku)
+            /*以下の取引記録を表示してね*/
+         const now = new Date()//new演算子でオブジェクトのインスタンスを生成
+         this.logs.push(`日付:${now}`)
+         this.logs.push("操作:入金")
+         this.logs.push(`金額:${Number(this.nyuryokugaku)}`)
+          },
+          syukkin:function(){
+              /*入力額が残高を上回ると出金できなくするために場合分け*/
+            if (this.nyuryokugaku <= this.zandaka) 
+        this.zandaka -= Number(this.nyuryokugaku)
+        const now = new Date()
+        this.logs.push(`日付:${now}`)
+        this.logs.push("操作:出金")
+        this.logs.push(`金額:${Number(this.nyuryokugaku)}`)
+       　 }
+        },
+      })
+    </script>
+  </body>
+</html>

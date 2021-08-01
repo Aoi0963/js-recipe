@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+
+    <!-- 5. 複数の飲み物を表示する -->
+    <section id="app6">
+      <h3>複数の飲み物を表示する</h3>
+
+      <div>
+        <div v-for="drink in drinks">
+          <div>{{ drink.name }}（{{drink.stock}}）</div>
+          <button v-on:click="kau(drink)" v-bind:disabled="drink.stock === 0">
+            {{ drink.price }}円
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      new Vue({
+        el: "#app6",
+        data: {
+          drinks: [
+            {
+              name: "お茶",
+              price: 120,
+              stock: 3,
+            },
+            {
+              name: "水",
+              price: 200,
+              stock: 3,
+            },
+          ],
+          kattaDrinkNames: [],
+        },
+        methods: {
+          kau: function(drink) {
+            alert(drink.name + "を買いました。")
+          },
+        },
+      })
+    </script>
+
+    <!-- 7. 見た目を整える -->
+    <section id="app7">
+      <h3>見た目を整える</h3>
+
+      <div class="container">
+        <div class="drinks">
+          <div v-for="drink in drinks" class="drink">
+            <div>{{ drink.name }}（{{drink.stock}}）</div>
+            <button v-on:click="kau(drink)" v-bind:disabled="drink.stock === 0">
+              {{ drink.price }}円
+            </button>
+          </div>
+        </div>
+
+        <hr />
+
+        <span v-for="name in kattaDrinkNames">{{ name }}</span>
+      </div>
+    </section>
+
+    <script>
+      new Vue({
+        el: "#app7",
+        data: {
+          drinks: [
+            {
+              name: "お茶",
+              price: 120,
+              icon: "🍵",
+              stock: 3,
+            },
+            {
+              name: "水",
+              price: 200,
+              icon: "🚰",
+              stock: 3,
+            },
+          ],
+          kattaDrinkNames: [],
+        },
+        methods: {
+          kau: function(drink) {
+            if (drink.stock > 0) {
+              drink.stock -= 1
+              this.kattaDrinkNames.push(drink.name)
+            }
+          },
+        },
+      })
+    </script>
+  </body>
+</html>
